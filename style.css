@@ -1,0 +1,50 @@
+
+body {
+            font-family: Arial, sans-serif;
+            background-color: #F8F9FA;
+            margin: 20px;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            color:#2D5A27;
+            position: center;
+            padding: 0px 0px 0px 0px;
+            text-align: center;
+            font-size: 2.5em;
+            font-style: italic;
+        }
+        p {
+            padding: 0px 200px 0px 200px;
+            color:#1A2B18;
+            line-height: 1.6;
+        }
+        .siyasiharita, .giresun, .cepni,.gezi-image, .cepni, .kahraman-image, .kusdili-image, .findik-image, .giresunspor-image 
+        {
+             width: 200px; 
+             height: auto;
+            display: block;
+            padding: 0px 0px 0px 0px;
+            margin: 0 auto;
+            position: center;
+            top: 20px;
+        }
+       table {
+             width: 100%; 
+             border-collapse: collapse; 
+             margin-top: 10px;
+             }
+        th, td { 
+            border: 1px solid #ddd;
+             padding: 10px;
+              text-align: left; 
+            }
+        th { 
+            background-color: #f4f4f4;
+        }
+        article, header, footer { 
+            margin-bottom: 15px; 
+            padding: 0px 400px 0px 400px;
+             color:#1A2B18;
+             line-height: 1.6;
+        }
+       
+        
