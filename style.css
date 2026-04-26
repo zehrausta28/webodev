@@ -1,8 +1,15 @@
-
-body {
+         
+        html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+        body {
             font-family: Arial, sans-serif;
             background-color: #F8F9FA;
-            margin: 20px;
+            margin:0;
+             padding: 0;
+            height: 100%;
         }
         h1, h2, h3, h4, h5, h6 {
             color:#2D5A27;
@@ -42,9 +49,16 @@ body {
         }
         article, header, footer { 
             margin-bottom: 15px; 
-            padding: 0px 400px 0px 400px;
+            padding: 0px 200px 0px 200px;
              color:#1A2B18;
              line-height: 1.6;
         }
-       
+        .iframe-wrapper {
+            display: flex;             
+            justify-content: center;  
+            align-items: center;      
+            height: 80vh;            
+            background-color: #f0f0f0; 
+        }
         
+            
