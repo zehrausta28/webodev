@@ -24,10 +24,19 @@
             color:#1A2B18;
             line-height: 1.6;
         }
-        .siyasiharita, .giresun, .cepni,.gezi-image, .cepni, .kahraman-image, .kusdili-image, .findik-image, .giresunspor-image 
+        .siyasiharita, .giresun, .cepni,.gezi-image, .cepni, .kahraman-image, .kusdili-image, .findik-image, .giresunspor-image, .toa2, .toa4
         {
              width: 200px; 
              height: auto;
+            display: block;
+            padding: 0px 0px 0px 0px;
+            margin: 0 auto;
+            position: center;
+            top: 20px;
+        }
+        .kusdili {
+            width: 500px;
+            height: auto;
             display: block;
             padding: 0px 0px 0px 0px;
             margin: 0 auto;
@@ -59,6 +68,11 @@
             align-items: center;      
             height: 80vh;            
             background-color: #f0f0f0; 
+        }
+        .toa {
+            border-radius: 10px 10px 10px 10px;
+            border: 2px solid #2D5A27;
+            margin: 0px 0px 0px 150px;
         }
         
             
