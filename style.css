@@ -11,6 +11,7 @@
              padding: 0;
             height: 100%;
         }
+        
         h1, h2, h3, h4, h5, h6 {
             color:#2D5A27;
             position: center;
@@ -24,7 +25,7 @@
             color:#1A2B18;
             line-height: 1.6;
         }
-        .siyasiharita, .giresun, .cepni,.gezi-image, .cepni, .kahraman-image, .kusdili-image, .findik-image, .giresunspor-image, .toa2, .toa4
+        .siyasiharita, .giresun,.gezi-image, .cepni, .kahraman-image, .kusdili-image, .giresunspor-image, .toa2, .toa4
         {
              width: 200px; 
              height: auto;
@@ -34,7 +35,7 @@
             position: center;
             top: 20px;
         }
-        .kusdili {
+        .kusdili, .findik-image, .toa, .toa3,.cepni-image {
             width: 500px;
             height: auto;
             display: block;
