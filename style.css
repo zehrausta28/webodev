@@ -106,21 +106,24 @@
         .header-top {
             display: flex;
             align-items: center;
-            gap: 15px;
-            margin-bottom: 15px;
+            gap:60px;
+            margin:0px 60px 0px 60px;
         }
 
         .site-icon {
-            width: 50px;
-            height: 50px;
+            width: 150px;
+            height: 150px;
             border-radius: 8px;
         }
 
         .site-title {
             font-family: 'Segoe UI', sans-serif;
-            font-size: 3rem;
+            font-size: 95px;
             color: #333;
             margin: 0;
+            background: linear-gradient(90deg, #c1f7ba, #abffa0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;   
         }
         .main-nav ul {
             list-style: none;
@@ -140,4 +143,19 @@
         .main-nav a:hover {
             color: #007bff; 
         }
-   
+
+        .nav-list {
+            background-color: #49983e;
+             color:#2D5A27;
+            justify-content: center;
+           border-style: solid;
+            border-color:#2D5A27;
+            border-width: 3px;
+            padding: 10px 0px 10px 0px;
+        }
+        .abc {
+            font-family: 'Segoe UI', sans-serif;
+            font-size: 120px;
+            color:#2D5A27;
+            margin: 0;
+        }
