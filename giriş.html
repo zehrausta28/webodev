@@ -2,17 +2,68 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <title>Giriş Yap</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Öğrenci Giriş Sistemi</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f4f9; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .login-card { background: white; padding: 2rem; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); width: 350px; }
+        h2 { text-align: center; color: #333; }
+        input { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ddd; border-radius: 5px; box-sizing: border-box; }
+        button { width: 100%; padding: 12px; background-color: #2c3e50; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; }
+        button:hover { background-color: #34495e; }
+        #hataMesaji { color: #e74c3c; font-size: 14px; text-align: center; margin-bottom: 10px; }
+    </style>
 </head>
 <body>
 
-<form action="kontrol.php" method="POST" class="login-container">
-    <h2>Giriş Yap</h2>
-    <input type="email" name="username" placeholder="E-posta" required>
-    <input type="password" name="password" placeholder="Şifre" required>
-    <button type="submit">Giriş Yap</button>
-</form>
+<div class="login-card">
+    <h2>Öğrenci Girişi</h2>
+    <div id="hataMesaji"></div>
+    
+    <script>
+      (function(){
+        const params = new URLSearchParams(window.location.search);
+        const hata = params.get('hata');
+        const hataBox = document.getElementById('hataMesaji');
+        const mesajlar = {
+          bos: 'Lütfen tüm alanları doldurun!',
+          mail: 'Geçersiz mail formatı! (@sakarya.edu.tr kullanın)',
+          yanlis: 'Hatalı bilgiler! Tekrar deneyin.'
+        };
+        if(hata && hataBox){
+          hataBox.textContent = mesajlar[hata] || '';
+        }
+      })();
+    </script>
+
+    <form id="loginForm" action="islem.php" method="POST" onsubmit="return kontrolEt()">
+        <input type="text" id="email" name="email" placeholder="b2412100001@sakarya.edu.tr">
+        <input type="password" id="password" name="password" placeholder="Şifre (Öğrenci No)">
+        <button type="submit">Giriş Yap</button>
+    </form>
+</div>
+
+<script>
+function kontrolEt() {
+    const email = document.getElementById('email').value.trim();
+    const password = document.getElementById('password').value.trim();
+    const hataBox = document.getElementById('hataMesaji');
+    
+    // Sakarya mail formatı için Regex (b2412100001@sakarya.edu.tr)
+    const mailFormat = /^[a-zA-Z0-9._-]+@sakarya\.edu\.tr$/;
+
+    if (email === "" || password === "") {
+        hataBox.innerHTML = "Lütfen tüm alanları doldurunuz!";
+        return false;
+    }
+
+    if (!mailFormat.test(email)) {
+        hataBox.innerHTML = "Geçersiz mail formatı! (@sakarya.edu.tr kullanın)";
+        return false;
+    }
+
+    return true; // Her şey tamamsa form gönderilir
+}
+</script>
 
 </body>
 </html>
