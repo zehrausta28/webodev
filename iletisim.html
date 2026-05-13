@@ -52,7 +52,153 @@
             </nav>
         </div>
     </header>
-    <h1>Text Example</h1>
-    <p>This is a simple text example.</p>
-</body>
+    <body>
+        <div class="container my-5">
+    <div class="card shadow-sm mx-auto" style="max-width: 700px;">
+        <div class="card-header bg-primary text-white">
+            <h4 class="mb-0">Kullanıcı Bilgi ve Deneyim Anketi</h4>
+        </div>
+        <div class="card-body">
+            <form id="surveyForm">
+                
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Ad Soyad</label>
+                    <input type="text" id="fullname" class="form-control" placeholder="Adınızı giriniz">
+                    <span id="err-fullname" class="error-msg">Ad Soyad boş bırakılamaz.</span>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label fw-bold">E-posta</label>
+                    <input type="text" id="email" class="form-control" placeholder="ornek@mail.com">
+                    <span id="err-email" class="error-msg">Geçerli bir e-posta adresi giriniz.</span>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Yaş Aralığı</label>
+                    <select id="ageGroup" class="form-select">
+                        <option value="">Seçiniz...</option>
+                        <option value="18-25">18-25</option>
+                        <option value="26-40">26-40</option>
+                        <option value="40+">40+</option>
+                    </select>
+                    <span id="err-age" class="error-msg">Lütfen bir yaş aralığı seçiniz.</span>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label fw-bold d-block">Cinsiyet</label>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="gender" value="kadin">
+                        <label class="form-check-label">Kadın</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="gender" value="erkek">
+                        <label class="form-check-label">Erkek</label>
+                    </div>
+                    <span id="err-gender" class="error-msg d-block">Cinsiyet seçimi zorunludur.</span>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label fw-bold d-block">İlgi Alanlarınız</label>
+                    <div class="form-check">
+                        <input class="form-check-input interest-check" type="checkbox" value="yazilim">
+                        <label class="form-check-label">Yazılım Geliştirme</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input interest-check" type="checkbox" value="siber">
+                        <label class="form-check-label">Siber Güvenlik</label>
+                    </div>
+                    <span id="err-interests" class="error-msg">En az bir alan seçmelisiniz.</span>
+                </div>
+
+                <div class="mb-3 form-check">
+                    <input type="checkbox" id="kvkk" class="form-check-input">
+                    <label class="form-check-label small">Verilerimin işlenmesini kabul ediyorum (KVKK).</label>
+                    <span id="err-kvkk" class="error-msg d-block">Onay vermeden devam edemezsiniz.</span>
+                </div>
+
+                <hr>
+
+                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                    <button type="button" onclick="validateWithNativeJS()" class="btn btn-outline-secondary">
+                        <i class="bi bi-code"></i> Native JS ile Denetle
+                    </button>
+                    <button type="button" onclick="validateWithLibrary()" class="btn btn-primary">
+                        <i class="bi bi-box"></i> Library Mantığı ile Denetle
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    function validateWithNativeJS() {
+     
+        resetErrors();
+        let isValid = true;
+
+        const fullname = document.getElementById('fullname').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const ageGroup = document.getElementById('ageGroup').value;
+        const gender = document.querySelector('input[name="gender"]:checked');
+        const interests = document.querySelectorAll('.interest-check:checked');
+        const kvkk = document.getElementById('kvkk').checked;
+
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (fullname === "") { showError('fullname'); isValid = false; }
+        if (!emailRegex.test(email)) { showError('email'); isValid = false; }
+        if (ageGroup === "") { showError('age'); isValid = false; }
+        if (!gender) { showError('gender'); isValid = false; }
+        if (interests.length === 0) { showError('interests'); isValid = false; }
+        if (!kvkk) { showError('kvkk'); isValid = false; }
+
+        if (isValid) alert("Başarılı! Native JS tüm alanları doğruladı.");
+    }
+
+   
+    function validateWithLibrary() {
+        resetErrors();
+        
+      
+        const formData = {
+            fullname: document.getElementById('fullname').value,
+            email: document.getElementById('email').value,
+            age: document.getElementById('ageGroup').value
+        };
+
+      
+        const schema = {
+            fullname: (val) => val.length > 2,
+            email: (val) => val.includes('@') && val.length > 5,
+            age: (val) => val !== ""
+        };
+
+        let errors = [];
+        if (!schema.fullname(formData.fullname)) errors.push('fullname');
+        if (!schema.email(formData.email)) errors.push('email');
+        if (!schema.age(formData.age)) errors.push('age');
+
+        if (errors.length > 0) {
+            errors.forEach(err => showError(err));
+            console.warn("Library Validation Failed:", errors);
+        } else {
+            alert("Başarılı! Framework/Library mantığı ile doğrulandı.");
+        }
+    }
+
+  
+    function showError(id) {
+        document.getElementById('err-' + id).style.display = 'block';
+        const input = document.getElementById(id);
+        if(input) input.classList.add('is-invalid');
+    }
+
+    function resetErrors() {
+        document.querySelectorAll('.error-msg').forEach(el => el.style.display = 'none');
+        document.querySelectorAll('.form-control, .form-select').forEach(el => el.classList.remove('is-invalid'));
+    }
+</script>
+    </body>
 </html>
