@@ -1,0 +1,7 @@
+xampp/
+apache/
+mysql/
+FileZillaFTP/
+tomcat/
+*.log
+*.tmp
