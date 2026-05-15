@@ -59,7 +59,7 @@
             <h4 class="mb-0">Kullanıcı Bilgi ve Deneyim Anketi</h4>
         </div>
         <div class="card-body">
-            <form id="surveyForm">
+            <form id="surveyForm" onsubmit="return false;">
                 
                 <div class="mb-3">
                     <label class="form-label fw-bold">Ad Soyad</label>
@@ -132,73 +132,100 @@
 </div>
 
 <script>
+function validateWithNativeJS() {
 
-    function validateWithNativeJS() {
-     
-        resetErrors();
-        let isValid = true;
+    resetErrors();
+    let isValid = true;
 
-        const fullname = document.getElementById('fullname').value.trim();
-        const email = document.getElementById('email').value.trim();
-        const ageGroup = document.getElementById('ageGroup').value;
-        const gender = document.querySelector('input[name="gender"]:checked');
-        const interests = document.querySelectorAll('.interest-check:checked');
-        const kvkk = document.getElementById('kvkk').checked;
+    const fullname = document.getElementById('fullname').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const ageGroup = document.getElementById('ageGroup').value;
+    const gender = document.querySelector('input[name="gender"]:checked');
+    const interests = document.querySelectorAll('.interest-check:checked');
+    const kvkk = document.getElementById('kvkk').checked;
 
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-        if (fullname === "") { showError('fullname'); isValid = false; }
-        if (!emailRegex.test(email)) { showError('email'); isValid = false; }
-        if (ageGroup === "") { showError('age'); isValid = false; }
-        if (!gender) { showError('gender'); isValid = false; }
-        if (interests.length === 0) { showError('interests'); isValid = false; }
-        if (!kvkk) { showError('kvkk'); isValid = false; }
+    if (fullname === "") { showError('fullname'); isValid = false; }
+    if (!emailRegex.test(email)) { showError('email'); isValid = false; }
+    if (ageGroup === "") { showError('age'); isValid = false; }
+    if (!gender) { showError('gender'); isValid = false; }
+    if (interests.length === 0) { showError('interests'); isValid = false; }
+    if (!kvkk) { showError('kvkk'); isValid = false; }
 
-        if (isValid) alert("Başarılı! Native JS tüm alanları doğruladı.");
+    if (isValid) {
+        saveAndRedirect();
     }
+}
 
-   
-    function validateWithLibrary() {
-        resetErrors();
-        
-      
-        const formData = {
-            fullname: document.getElementById('fullname').value,
-            email: document.getElementById('email').value,
-            age: document.getElementById('ageGroup').value
-        };
+function validateWithLibrary() {
+    resetErrors();
 
-      
-        const schema = {
-            fullname: (val) => val.length > 2,
-            email: (val) => val.includes('@') && val.length > 5,
-            age: (val) => val !== ""
-        };
+    const formData = {
+        fullname: document.getElementById('fullname').value,
+        email: document.getElementById('email').value,
+        age: document.getElementById('ageGroup').value
+    };
 
-        let errors = [];
-        if (!schema.fullname(formData.fullname)) errors.push('fullname');
-        if (!schema.email(formData.email)) errors.push('email');
-        if (!schema.age(formData.age)) errors.push('age');
+    const schema = {
+        fullname: (val) => val.length > 2,
+        email: (val) => val.includes('@') && val.length > 5,
+        age: (val) => val !== ""
+    };
 
-        if (errors.length > 0) {
-            errors.forEach(err => showError(err));
-            console.warn("Library Validation Failed:", errors);
-        } else {
-            alert("Başarılı! Framework/Library mantığı ile doğrulandı.");
-        }
+    let errors = [];
+
+    if (!schema.fullname(formData.fullname)) errors.push('fullname');
+    if (!schema.email(formData.email)) errors.push('email');
+    if (!schema.age(formData.age)) errors.push('age');
+
+    if (errors.length > 0) {
+        errors.forEach(err => showError(err));
+    } else {
+        saveAndRedirect();
     }
+}
 
-  
-    function showError(id) {
-        document.getElementById('err-' + id).style.display = 'block';
-        const input = document.getElementById(id);
-        if(input) input.classList.add('is-invalid');
-    }
+function saveAndRedirect() {
+    const selectedInterests = [];
 
-    function resetErrors() {
-        document.querySelectorAll('.error-msg').forEach(el => el.style.display = 'none');
-        document.querySelectorAll('.form-control, .form-select').forEach(el => el.classList.remove('is-invalid'));
-    }
+    document.querySelectorAll('.interest-check:checked').forEach(item => {
+        selectedInterests.push(item.nextElementSibling.textContent);
+    });
+
+    const selectedGender = document.querySelector('input[name="gender"]:checked');
+
+    const formData = {
+        fullname: document.getElementById('fullname').value,
+        email: document.getElementById('email').value,
+        age: document.getElementById('ageGroup').value,
+        gender: selectedGender ? selectedGender.nextElementSibling.textContent : "",
+        interests: selectedInterests
+    };
+
+    localStorage.setItem("surveyData", JSON.stringify(formData));
+
+    window.location.href = "sonuc.html";
+}
+
+function showError(id) {
+    document.getElementById('err-' + id).style.display = 'block';
+
+    const input = document.getElementById(id);
+    if(input) input.classList.add('is-invalid');
+}
+
+function resetErrors() {
+    document.querySelectorAll('.error-msg').forEach(el => {
+        el.style.display = 'none';
+    });
+
+    document.querySelectorAll('.form-control, .form-select').forEach(el => {
+        el.classList.remove('is-invalid');
+    });
+}
+    
+    
 </script>
   <footer class="bg-white border-top py-4 mt-5">
         <div class="container text-center">
