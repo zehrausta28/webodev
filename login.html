@@ -3,36 +3,22 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Giriş Yap</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link rel="stylesheet" href="style.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    
-</head>
-
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
 <style>
 body {
     background: #ffffff;
     margin: 0;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
 }
+
 .login-container{
     display: flex;
     justify-content: center;
-    align-items: flex-start;
-    padding-top: 10px;
-    padding-bottom: 20px;
+    align-items: center;
+    min-height: 70vh;
 }
 
 .login-card {
@@ -42,9 +28,7 @@ body {
     background: #ffffff;
     color: #333;
     padding: 30px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-    margin-top: 120px;
-
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
 }
 
 input {
@@ -56,13 +40,11 @@ input {
 h2 {
     text-align: center;
     margin-bottom: 20px;
-    color: #333;
 }
 </style>
 
 <script>
 function validateForm() {
-
     const email = document.forms["loginForm"]["email"].value;
     const password = document.forms["loginForm"]["password"].value;
 
@@ -71,10 +53,17 @@ function validateForm() {
         return false;
     }
 
-    const pattern = /^[a-zA-Z0-9._%+-]+@sakarya\.edu\.tr$/;
+    const emailPattern = /^[a-zA-Z0-9._%+-]+@sakarya\.edu\.tr$/;
 
-    if(!pattern.test(email)){
-        alert("Sakarya maili gir (örnek: b251210019@sakarya.edu.tr)");
+    if(!emailPattern.test(email)){
+        alert("Geçerli Sakarya maili gir!");
+        return false;
+    }
+
+    const studentNo = email.split("@")[0];
+
+    if(password !== studentNo){
+        alert("Şifre, mailde @ işaretinden önceki kısım ile aynı olmalı!");
         return false;
     }
 
@@ -85,70 +74,38 @@ function validateForm() {
 </head>
 
 <body>
-     <header class="bg-dark text-white shadow-sm mb-4">
-        <div class="container py-4">
-            <div class="row align-items-center">
-                <div class="col-md-6 d-flex align-items-center justify-content-center justify-content-md-start">
-                    <img src="resim/icon.PNG" alt="Logo" class="rounded-circle me-3" style="height: 200px; border: 2px solid #0d6efd;">
-                    <div>
-                        <h1 class="baslik">Giriş</h1>
-                 
-                    </div>
-                </div>
-    <div class="col-md-6 text-center text-md-end mt-3 mt-md-0">
-                    <a href="https://github.com" class="text-white me-3 text-decoration-none"><i class="bi bi-github"></i> GitHub</a>
-                    <a href="https://linkedin.com" class="text-white text-decoration-none"><i class="bi bi-linkedin"></i> LinkedIn</a>
-                    <a href="https://www.instagram.com/zehra.usta28/" class="text-white ms-3 text-decoration-none"><i class="bi bi-instagram"></i> Instagram</a>
-                </div>
-<nav class="navbar navbar-expand-lg navbar-dark mt-4">
-                <button class="navbar-toggler mx-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
-                    <ul class="navbar-nav gap-1">
-                        <li class="nav-item"><a class="nav-link active" href="index.html">Hakkımda</a></li>
-                        <li class="nav-item"><a class="nav-link" href="ozgecmis.html">Özgeçmiş</a></li>
-                        <li class="nav-item"><a class="nav-link" href="şehrim.html">Şehrim</a></li>
-                        <li class="nav-item"><a class="nav-link" href="findik.html">Giresun Fındığı</a></li>
-                        <li class="nav-item"><a class="nav-link" href="gezi.html">Gezilecek Yerler</a></li>
-                        <li class="nav-item"><a class="nav-link" href="giresunspor.html">Giresunspor</a></li>
-                        <li class="nav-item"><a class="nav-link" href="cepni.html">Çepni Kültürü</a></li>
-                        <li class="nav-item"><a class="nav-link" href="kusdili.html">Kuşdili</a></li>
-                        <li class="nav-item"><a class="nav-link" href="kahramanlar.html">Topal Osman Ağa</a></li>
-                        <li class="nav-item"><a class="nav-link" href="login.html">Giriş</a></li>
-                        <li class="nav-item"><a class="nav-link" href="iletisim.html">İletişim</a></li>
-                    </ul>
-                </div>
-            </nav>
-        </div>
-    </header>
 
-<br><br>
+<header class="bg-dark text-white shadow-sm mb-4">
+    <div class="container py-4 text-center">
+        <h1>Giriş Sayfası</h1>
+    </div>
+</header>
+
 <div class="login-container">
     <div class="login-card">
-<h2>🔐 Giriş Yap</h2>
+        <h2>🔐 Giriş Yap</h2>
 
-<form name="loginForm" action="login.php" method="POST" onsubmit="return validateForm()">
+        <form name="loginForm" action="sonuc.html" method="GET" onsubmit="return validateForm()">
 
-    <div class="mb-3">
-        <label>Mail</label>
-        <input type="text" name="email" class="form-control" placeholder="b251210019@sakarya.edu.tr">
+            <div class="mb-3">
+                <label>Mail</label>
+                <input type="text" name="email" class="form-control" placeholder="b251210019@sakarya.edu.tr">
+            </div>
+
+            <div class="mb-3">
+                <label>Şifre</label>
+                <input type="password" name="password" class="form-control" placeholder="Öğrenci No">
+            </div>
+
+            <button type="submit" class="btn btn-danger w-100">Giriş Yap</button>
+
+        </form>
     </div>
-
-    <div class="mb-3">
-        <label>Şifre</label>
-        <input type="text" name="password" class="form-control" placeholder="Öğrenci No">
-    </div>
-
-    <button class="btn btn-danger w-100">Giriş Yap</button>
-
-</form>
 </div>
-</div>
-    <footer class="bg-dark text-white text-center py-3 mt-4">
-        &copy; 2024 Zehra Usta. Tüm hakları saklıdır.
-        <br>
-        </footer><
+
+<footer class="bg-dark text-white text-center py-3 mt-4">
+    © 2024 Zehra Usta. Tüm hakları saklıdır.
+</footer>
 
 </body>
 </html>
