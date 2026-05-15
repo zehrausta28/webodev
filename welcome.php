@@ -12,7 +12,7 @@ $user = $_GET['user'];
 
 <style>
 body {
-    background: #ffffff;
+    background: #121212;
     color: white;
     display: flex;
     justify-content: center;
@@ -20,7 +20,7 @@ body {
     height: 100vh;
 }
 .card {
-    background: #ffffff;
+    background: #1e1e1e;
     padding: 40px;
     border-radius: 20px;
     text-align: center;
